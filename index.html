@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<title>CPAN</title>
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+<style type="text/css">
+body {
+  max-width: 80%;
+  font-family: 'Ubuntu';
+  padding-left: 2em;
+  line-height: 125%;
+}
+
+.errmsg {
+  white-space: normal;
+  width: 41.5em;
+  border: 1px solid gray;
+  background: #eee;
+  padding: 0.5em;
+  border-radius: 4px;
+  font-family: 'Inconsolata', monospace;
+  line-height: 100%;
+}
+
+.module {
+  border: 1px solid #ccc;
+  background: #eee;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 4px;
+  font-family: 'Inconsolata', monospace;
+}
+
+.char {
+  font-family: monospace;
+  background: #eee;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
+.shell {
+  margin-left: 1.5em;
+  width: 40em;
+  background: #eee;
+  padding: 0.5em;
+  font-family: 'Inconsolata', monospace;
+}
+</style>
+</head>
+<body>
+
+<p>
+You are seeing an error message like this when running a Perl script?
+</p>
+
+<pre class="errmsg">
+Can't locate <strong>LWP/UserAgent</strong>.pm in @INC (@INC contains: /etc/perl /usr/local/lib/perl/5.12.4 /usr/local/share/perl/5.12.4 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.12 /usr/share/perl/5.12 /usr/local/lib/site_perl .) at -e line 1.<br>
+BEGIN failed--compilation aborted at -e line 1.
+</pre>
+
+<p>
+This means you are missing the Perl module <span class="module">LWP::UserAgent</span>.<br>
+(Get the module name by replacing <span class="char">/</span> with <span class="char">::</span> and ignore the .pm extension)
+</p>
+
+<h2>Install a module</h2>
+
+<p>
+Install <span class="module">LWP::UserAgent</span> on your system with <a href="https://github.com/miyagawa/cpanminus">cpanminus</a>, a zero configuration <a href="http://www.cpan.org/">CPAN</a> client:
+</p>
+<pre class="shell" style="margin-top: 1.5em; margin-bottom: 3em; background: #d0d0d0">
+curl -L http://cpanmin.us | perl - --sudo App::cpanminus
+cpanm --sudo LWP::UserAgent
+</pre>
+
+<p>
+Or, if you <strong>don’t have root access</strong>, you can install to ~/perl5 instead:
+</p>
+
+<pre class="shell">
+$ curl -L http://cpanmin.us | perl - -l ~/perl5 local::lib App::cpanminus
+$ echo 'eval $(perl -I~/perl5/lib/perl5 -Mlocal::lib)' &gt;&gt; ~/.bashrc
+$ eval `perl -I~/perl5/lib/perl5 -Mlocal::lib`
+$ cpanm LWP::UserAgent
+</pre>
+
+<h2 style="margin-top: 2em">Troubleshooting</h2>
+
+1) cpanm says "! Can't configure the distribution. You probably need to have 'make'. See /home/maikf/.cpanm/build.log for details."
+
+Apparently, your system does not have the make command, which you need to install Perl modules.
+
+On Debian, install:
+sudo apt-get install build-essential
+
+</body>
+</html>

@@ -210,7 +210,7 @@ This means you are missing a Perl module, in this specific case <span class="mod
 Install <span class="module repmod">LWP::UserAgent</span> on your system using <a href="https://github.com/miyagawa/cpanminus">cpanminus</a>, a zero configuration <a href="http://www.cpan.org/">CPAN</a> client:
 </p>
 
-<div class="os">
+<div class="os" id="inst-root-os">
 <span id="inst-root-debian"><a href="javascript:switchText('inst-root', 'debian')">Debian</a></span>
 <span id="inst-root-general" class="selected"><a href="javascript:switchText('inst-root', 'general')">General</a></span>
 </div>
@@ -229,7 +229,7 @@ cpanm --sudo <span class="repmod">LWP::UserAgent</span><span class="expl">↳ Us
 Or, if you <strong>don’t have root access</strong>, you can install to ~/perl5 instead:
 </p>
 
-<div class="os">
+<div class="os" id="inst-user-os">
 <span class="selected">General</span>
 </div>
 <div class="toggle">
@@ -297,8 +297,8 @@ function switchText(name, os) {
             $(this).text(ostext);
 	}
     });
-    $('.os span').removeClass('selected');
-    $('.os #' + name + '-' + os).addClass('selected');
+    $('#' + name + '-os span').removeClass('selected');
+    $('#' + name + '-os #' + name + '-' + os).addClass('selected');
 }
 
 $(document).ready(function() {

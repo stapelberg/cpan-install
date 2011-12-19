@@ -205,7 +205,8 @@ Are you seeing an error message like this when running a Perl script?
 
 <textarea id="errmsg" rows="5" cols="90" placeholder="Can't locate LWP/UserAgent.pm in @INC (@INC contains: /etc/perl /usr/local/lib/perl/5.12.4 /usr/local/share/perl/5.12.4 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.12 /usr/share/perl/5.12 /usr/local/lib/site_perl .) at -e line 1. 
 BEGIN failed--compilation aborted at -e line 1.">
-</textarea>
+Can't locate LWP/UserAgent.pm in @INC (@INC contains: /etc/perl /usr/local/lib/perl/5.12.4 /usr/local/share/perl/5.12.4 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.12 /usr/share/perl/5.12 /usr/local/lib/site_perl .) at -e line 1. 
+BEGIN failed--compilation aborted at -e line 1.</textarea>
 
 <p>
 This means you are missing a Perl module, in this specific case <span class="module repmod">LWP::UserAgent</span>.<br>
@@ -314,18 +315,25 @@ function switchText(name, os) {
 }
 
 $(document).ready(function() {
+    var errmsg = $('#errmsg');
+    var placeholdersupport = ('placeholder' in document.createElement('input'));
     $(window).hashchange(function() {
         var name = location.hash.replace(/^#/, '');
         if (name !== "") {
             $('.repmod').text(name);
             var file = name.replace(/::/g, '/') + '.pm';
-            $('#errmsg').attr('placeholder', "Can't locate " + file + " in @INC (@INC contains: /etc/perl /usr/local/lib/perl/5.12.4 /usr/local/share/perl/5.12.4 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.12 /usr/share/perl/5.12 /usr/local/lib/site_perl .) at -e line 1. BEGIN failed--compilation aborted at -e line 1.");
+            var val = "Can't locate " + file + " in @INC (@INC contains: /etc/perl /usr/local/lib/perl/5.12.4 /usr/local/share/perl/5.12.4 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.12 /usr/share/perl/5.12 /usr/local/lib/site_perl .) at -e line 1. BEGIN failed--compilation aborted at -e line 1.";
+            errmsg.attr('placeholder', val);
+            if (!placeholdersupport) {
+                errmsg.val(val);
+            }
         }
     });
     $(window).hashchange();
-    var errmsg = $('#errmsg');
+    if (placeholdersupport) {
+        errmsg.val('');
+    }
     var errchange = function(ev) {
-        console.log('error changed to ' + errmsg.val());
         var matches = errmsg.val().match("Can't locate ([^ ]+)");
         if (matches !== null) {
             var name = matches[1].replace(/\//g, '::').replace(/\.pm$/i, '');

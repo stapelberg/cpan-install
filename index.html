@@ -250,8 +250,8 @@ Or, if you <strong>don’t have root access</strong>, you can install to ~/perl5
 </div>
 <pre id="inst-user" class="shell">
 <span>curl -L http://cpanmin.us | perl - -l ~/perl5 local::lib App::cpanminus<span class="expl">↳ Downloads and installs local::lib and cpanminus to ~/perl5</span>
-echo 'eval $(perl -I~/perl5/lib/perl5 -Mlocal::lib)' &gt;&gt; ~/.bashrc<span class="expl">↳ Writes environment variables with local::lib to ~/.bashrc</span>
-eval $(perl -I~/perl5/lib/perl5 -Mlocal::lib)<span class="expl">↳ Sets up environment variables with local::lib in this session</span>
+echo 'eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)' &gt;&gt; ~/.bashrc<span class="expl">↳ Writes environment variables with local::lib to ~/.bashrc</span>
+eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)<span class="expl">↳ Sets up environment variables with local::lib in this session</span>
 cpanm <span class="repmod">LWP::UserAgent</span><span class="expl">↳ Installs <span class="repmod">LWP::UserAgent</span> to ~/perl5 (due to environment variables)</span></span>
 </pre>
 
